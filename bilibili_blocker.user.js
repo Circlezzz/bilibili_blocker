@@ -2,10 +2,11 @@
 // @name         block bilibili danmaku and comments
 // @name:zh-CN   屏蔽bilibili弹幕和评论
 // @namespace    Dreamfall
-// @version      0.15
+// @version      0.2
 // @description  block all the danmaku and comments of bilibili
 // @description:zh-CN 屏蔽全部bilibili弹幕和评论
 // @author       Dreamfall
+// @icon         https://www.bilibili.com/favicon.ico
 // @homepageURL  https://github.com/boeing888/bilibili_blocker
 // @match        https://www.bilibili.com/video/*
 // @grant        none
