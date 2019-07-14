@@ -25,6 +25,7 @@
                 // was a child added with ID of 'bar'?
                 if (mutations[i].addedNodes[j].className == "bui-checkbox") {
                     mutations[i].addedNodes[j].click();
+                    observer.disconnect();
                 }
             }
         }
