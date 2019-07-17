@@ -2,7 +2,7 @@
 // @name         block bilibili danmaku and comments
 // @name:zh-CN   屏蔽bilibili弹幕和评论
 // @namespace    Dreamfall
-// @version      1.0
+// @version      1.1
 // @description  block all the danmaku and comments of bilibili
 // @description:zh-CN 屏蔽全部bilibili弹幕和评论
 // @author       Dreamfall
