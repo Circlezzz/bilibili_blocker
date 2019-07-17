@@ -15,14 +15,20 @@
 (function () {
     'use strict';
 
+    // remove comment
     document.getElementById("comment").style.display = "none";
+
+    // remove recommendation
+    document.getElementById("reco_list").style.display = "none";
+
+    // toggle danmaku button
     // define a new observer
     var observer = new MutationObserver(function (mutations, observer) {
         // look through all mutations that just occured
-        for (let i = 0; i < mutations.length; ++i) {
+        for (let i = 0; i < mutations.length; i++) {
             // look through all added nodes of this mutation
-            for (let j = 0; j < mutations[i].addedNodes.length; ++j) {
-                // was a child added with ID of 'bar'?
+            for (let j = 0; j < mutations[i].addedNodes.length; j++) {
+                // was a child added with className of 'bui-checkbox'?
                 if (mutations[i].addedNodes[j].className == "bui-checkbox") {
                     mutations[i].addedNodes[j].click();
                     observer.disconnect();
