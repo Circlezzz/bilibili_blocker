@@ -1,61 +1,31 @@
 // ==UserScript==
-// @name         block bilibili danmaku and comments
-// @name:zh-CN   屏蔽bilibili弹幕和评论
+// @name         block bilibili danmaku
+// @name:zh-CN   屏蔽bilibili弹幕
 // @namespace    Dreamfall
-// @version      1.2
-// @description  block all the danmaku and comments of bilibili
-// @description:zh-CN 屏蔽全部bilibili弹幕和评论
+// @version      1.3
+// @description  block all the danmaku of bilibili
+// @description:zh-CN 屏蔽全部bilibili弹幕
 // @author       Dreamfall
 // @icon         https://www.bilibili.com/favicon.ico
 // @homepageURL  https://github.com/boeing888/bilibili_blocker
-// @match        https://www.bilibili.com/video/*
+// @match        *://www.bilibili.com/video/*
+// @run-at       document-idle
+// @require      https://cdn.bootcss.com/jquery/3.4.1/jquery.min.js
+// @require      https://greasyfork.org/scripts/48306-waitforkeyelements/code/waitForKeyElements.js?version=275769
 // @grant        none
 // ==/UserScript==
 
-(function () {
-    'use strict';
 
-    // remove comment
-    if (document.getElementById("comment")) {
-        document.getElementById("comment").style.display = "none";
-    }
+'use strict';
 
-    // remove recommendation
-    if (document.getElementById("reco_list")) {
-        document.getElementById("reco_list").style.display = "none";
-    }
+var selector = {
+    "on": "input[class='bui-checkbox']:checked",
+    "off": "input[class='bui-checkbox']:not(:checked)"
+};
 
-    // remove live recommendation
-    // define a new observer
-    var observer2 = new MutationObserver(function (mutations, observer) {
-        // look through all mutations that just occured
-        for (let i = 0; i < mutations.length; i++) {
-            // look through all added nodes of this mutation
-            for (let j = 0; j < mutations[i].addedNodes.length; j++) {
-                // was a child added with className of 'bui-checkbox'?
-                if (mutations[i].addedNodes[j].id == "live_recommand_report") {
-                    mutations[i].addedNodes[j].style.display = "none";
-                    observer.disconnect();
-                }
-            }
-        }
-    });
-    observer2.observe(document.getElementById("app"), { childList: true, subtree: true });
+// Disable danmaku when player loaded
+function disable_danmaku(player) {
+    player[0].click();
+};
 
-    // toggle danmaku button
-    // define a new observer
-    var observer = new MutationObserver(function (mutations, observer) {
-        // look through all mutations that just occured
-        for (let i = 0; i < mutations.length; i++) {
-            // look through all added nodes of this mutation
-            for (let j = 0; j < mutations[i].addedNodes.length; j++) {
-                // was a child added with className of 'bui-checkbox'?
-                if (mutations[i].addedNodes[j].className == "bui-checkbox") {
-                    mutations[i].addedNodes[j].click();
-                    observer.disconnect();
-                }
-            }
-        }
-    });
-    observer.observe(document.getElementById("bilibiliPlayer"), { childList: true, subtree: true });
-})();
+waitForKeyElements(selector.on, disable_danmaku, false);
