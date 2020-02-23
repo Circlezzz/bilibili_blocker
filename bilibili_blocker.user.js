@@ -2,7 +2,7 @@
 // @name         block bilibili danmaku
 // @name:zh-CN   屏蔽bilibili弹幕
 // @namespace    Dreamfall
-// @version      1.3
+// @version      1.5
 // @description  block all the danmaku of bilibili
 // @description:zh-CN 屏蔽全部bilibili弹幕
 // @author       Dreamfall
@@ -18,14 +18,4 @@
 
 'use strict';
 
-var selector = {
-    "on": "input[class='bui-checkbox']:checked",
-    "off": "input[class='bui-checkbox']:not(:checked)"
-};
-
-// Disable danmaku when player loaded
-function disable_danmaku(player) {
-    player[0].click();
-};
-
-waitForKeyElements(selector.on, disable_danmaku, false);
+waitForKeyElements("div[class='bilibili-player-video-danmaku-switch bui bui-switch']>input", (button) => { button[0].click() }, false);
